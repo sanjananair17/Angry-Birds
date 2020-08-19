@@ -23,6 +23,9 @@ function setup(){
 
 
     ground = new Ground(600,height,1200,20);
+    ground1 = new Ground(-5, 200, 10, 400);
+    ground2 = new Ground(600, -5, 1200, 10);
+    ground3 = new Ground(1205, 200, 10, 400);
     platform = new Ground(150, 305, 300, 170);
 
     box1 = new Box(700,320,70,70);
@@ -60,6 +63,9 @@ function draw(){
     box1.display();
     box2.display();
     ground.display();
+    ground1.display();
+    ground2.display();
+    ground3.display();
     pig1.display();
     pig1.score();
     log1.display();
@@ -81,9 +87,9 @@ function draw(){
 }
 
 function mouseDragged(){
-    //if (gameState!=="launched"){
+    if (gameState!=="launched"){
         Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
-    //}
+    }
 }
 
 
@@ -94,7 +100,10 @@ function mouseReleased(){
 
 function keyPressed(){
     if(keyCode === 32){
+        bird.trajectory =[];
+        Matter.Body.setPosition(bird.body, {x: 200, y: 50})
        slingshot.attach(bird.body);
+       gameState = "onSling";
     }
 }
 
